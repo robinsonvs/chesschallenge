@@ -10,9 +10,9 @@ import java.util.Objects;
 
 public class ChessBoard {
 
-    private int lines;
-    private int columns;
-    private int initNumberPieces;
+    private final int lines;
+    private final int columns;
+    private final int initNumberPieces;
     private List<AbstractPieceType> piecesAlreadyUsed;
     private AbstractPieceType[][] boardHouses;
 
@@ -37,8 +37,8 @@ public class ChessBoard {
     private void startPositions(int lines, int columns) {
         this.boardHouses = new AbstractPieceType[lines][columns];
 
-        for(int line = 1; line < lines; line++) {
-            for(int column = 1; column < columns; column++) {
+        for (int line = 1; line < lines; line++) {
+            for (int column = 1; column < columns; column++) {
                 this.boardHouses[line][column] = new WithoutPiece(line, column);
             }
         }
@@ -47,7 +47,7 @@ public class ChessBoard {
     private AbstractPieceType[][] setBoardHouses(List<AbstractPieceType> abstractPieceTypes) {
         this.piecesAlreadyUsed = new ArrayList<>();
 
-        for(AbstractPieceType pieceType : abstractPieceTypes) {
+        for (AbstractPieceType pieceType : abstractPieceTypes) {
             this.boardHouses[pieceType.getLine()][pieceType.getColumn()] = pieceType;
             this.piecesAlreadyUsed.add(pieceType);
         }
@@ -61,6 +61,61 @@ public class ChessBoard {
 
     public int getColumns() {
         return columns;
+    }
+
+    public void show() {
+        for (int i = 1; i < lines; i++) {
+            for (int j = 1; j < columns; j++) {
+                System.out.println(this.boardHouses[i][j].toString() + " ");
+            }
+            System.out.println();
+        }
+        System.out.println();
+    }
+
+    public ChessBoard place(AbstractPieceType pieceType) {
+        ChessBoard board = new ChessBoard(lines, columns, initNumberPieces, this.usedPositions());
+        board.piecesAlreadyUsed.add(pieceType);
+        board.boardHouses[pieceType.getLine()][pieceType.getColumn()] = pieceType;
+
+        return board;
+    }
+
+    public List<AbstractPieceType> usedPositions() {
+        List<AbstractPieceType> usedPositions = new ArrayList<>();
+
+        for (int i = 1; i < lines; i++) {
+            for (int j = 1; j < columns; j++) {
+                AbstractPieceType place = this.boardHouses[i][j];
+
+                if (!place.toString().equals("x")) {
+                    usedPositions.add(place);
+                }
+            }
+        }
+
+        return usedPositions;
+    }
+
+    public boolean isSafeMove(AbstractPieceType pieceTypeDestiny) {
+        return this.piecesAlreadyUsed.stream().noneMatch(piece -> (piece.canAttack(pieceTypeDestiny) || pieceTypeDestiny.canAttack(piece)));
+    }
+
+    public void remove(AbstractPieceType pieceType) {
+        this.piecesAlreadyUsed.remove(pieceType);
+        this.boardHouses[pieceType.getLine()][pieceType.getColumn()] = new WithoutPiece(pieceType.getLine(), pieceType.getColumn());
+    }
+
+    public boolean identicalPieces(AbstractPieceType[][] positionsOne, AbstractPieceType[][] positionsTwo) {
+        for (int i = 1; i < lines; i++) {
+            for (int j = 1; j < columns; j++) {
+                if (!positionsOne[i][j].equals(positionsTwo[i][j])) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 
     @Override

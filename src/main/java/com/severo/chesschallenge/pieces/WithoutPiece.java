@@ -13,6 +13,6 @@ public class WithoutPiece extends AbstractPieceType {
 
     @Override
     public String pieceType() {
-        return " ";
+        return "x";
     }
 }
