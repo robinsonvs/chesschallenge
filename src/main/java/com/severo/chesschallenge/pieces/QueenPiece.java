@@ -15,4 +15,8 @@ public class QueenPiece extends AbstractPieceType {
         return sameLine || sameColumn || sameDiagonal;
     }
 
+    @Override
+    public String pieceType() {
+        return "Queen";
+    }
 }

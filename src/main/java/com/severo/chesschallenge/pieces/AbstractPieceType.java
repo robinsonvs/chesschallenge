@@ -22,6 +22,8 @@ public abstract class AbstractPieceType {
 
     public abstract boolean canAttack(AbstractPieceType abstractPieceType);
 
+    public abstract String pieceType();
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
