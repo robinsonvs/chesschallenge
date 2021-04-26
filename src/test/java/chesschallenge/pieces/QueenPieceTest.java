@@ -13,4 +13,12 @@ public class QueenPieceTest {
 
         Assert.assertTrue(queenFirst.canAttack(queenSecond));
     }
+
+    @Test
+    public void testDoesNotCanAttack() {
+        QueenPiece queenFirst = new QueenPiece(1, 1);
+        QueenPiece queenSecond = new QueenPiece(3, 4);
+
+        Assert.assertFalse(queenFirst.canAttack(queenSecond));
+    }
 }
