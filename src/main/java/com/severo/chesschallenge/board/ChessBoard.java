@@ -44,7 +44,7 @@ public class ChessBoard {
         }
     }
 
-    private AbstractPieceType[][] setBoardHouses(List<AbstractPieceType> abstractPieceTypes) {
+    public AbstractPieceType[][] setBoardHouses(List<AbstractPieceType> abstractPieceTypes) {
         this.piecesAlreadyUsed = new ArrayList<>();
 
         for (AbstractPieceType pieceType : abstractPieceTypes) {
@@ -73,7 +73,7 @@ public class ChessBoard {
         System.out.println();
     }
 
-    public ChessBoard place(AbstractPieceType pieceType) {
+    public ChessBoard positionOnBoard(AbstractPieceType pieceType) {
         ChessBoard board = new ChessBoard(lines, columns, initNumberPieces, this.usedPositions());
         board.piecesAlreadyUsed.add(pieceType);
         board.boardHouses[pieceType.getLine()][pieceType.getColumn()] = pieceType;
@@ -116,6 +116,10 @@ public class ChessBoard {
         }
 
         return true;
+    }
+
+    public boolean isValidConfiguration() {
+        return this.initNumberPieces == this.piecesAlreadyUsed.size();
     }
 
     @Override

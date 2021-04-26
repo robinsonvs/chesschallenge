@@ -68,8 +68,8 @@ public class Validation {
                 return new BishopPiece(line, column);
             case "Rook":
                 return new RookPiece(line, column);
-            default:
-                throw new RuntimeException("Undefined Piece Type");
         }
+
+        return new WithoutPiece(0, 0);
     }
 }
