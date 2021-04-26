@@ -5,12 +5,13 @@ import com.severo.chesschallenge.utils.Validation;
 import java.util.ArrayList;
 import java.util.List;
 
-public class KingPiece extends AbstractPieceType {
+public class KnightPiece extends AbstractPieceType {
 
-    private static final int[] moviesX = new int[]{-1, -1, -1, 0, 1, 1, 1, 0};
-    private static final int[] moviesY = new int[]{-1, 0, 1, 1, 1, 0, -1, -1};
+    private static final int[] moviesX = new int[]{1, 2, 2, 1, -1, -2, -2, -1};
+    private static final int[] moviesY = new int[]{-2, -1, 1, 2, 2, 1, -1, -2};
 
-    public KingPiece(int line, int column) {
+
+    public KnightPiece(int line, int column) {
         super(line, column);
     }
 
@@ -21,7 +22,7 @@ public class KingPiece extends AbstractPieceType {
 
         List<AbstractPieceType> movies = new ArrayList<>();
 
-        for (int i = 0; i < 8; i++) {
+        for(int i = 0; i < 8; i++) {
             int destinyLine = line + moviesX[i];
             int destinyColumn = column + moviesY[i];
 
@@ -35,7 +36,6 @@ public class KingPiece extends AbstractPieceType {
 
     @Override
     public String pieceType() {
-        return "King";
+        return "Knight";
     }
-
 }
