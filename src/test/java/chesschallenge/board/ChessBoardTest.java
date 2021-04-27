@@ -1,6 +1,7 @@
 package chesschallenge.board;
 
 import com.severo.chesschallenge.board.ChessBoard;
+import com.severo.chesschallenge.pieces.BishopPiece;
 import com.severo.chesschallenge.pieces.KingPiece;
 import com.severo.chesschallenge.pieces.KnightPiece;
 import com.severo.chesschallenge.pieces.QueenPiece;
@@ -22,15 +23,15 @@ public class ChessBoardTest {
     @Test
     public void twoDifferentPieces() {
         KingPiece king = new KingPiece(1, 1);
-        KnightPiece knight = new KnightPiece(1, 1);
+        BishopPiece bishop = new BishopPiece(1, 1);
 
-        Assert.assertNotEquals(king, knight);
+        Assert.assertNotEquals(king, bishop);
     }
 
     @Test
     public void twoIdenticalBoards() {
-        ChessBoard chessBoardFirst = new ChessBoard(5, 5, 2, Arrays.asList(new KingPiece(1, 1), new QueenPiece(2, 2)));
-        ChessBoard chessBoardSecond = new ChessBoard(5, 5, 2, Arrays.asList(new KingPiece(1, 1), new QueenPiece(2, 2)));
+        ChessBoard chessBoardFirst = new ChessBoard(5, 5, Arrays.asList(new KingPiece(1, 1), new QueenPiece(2, 2)));
+        ChessBoard chessBoardSecond = new ChessBoard(5, 5, Arrays.asList(new KingPiece(1, 1), new QueenPiece(2, 2)));
 
         Assert.assertEquals(chessBoardFirst, chessBoardSecond);
     }

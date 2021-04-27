@@ -10,25 +10,19 @@ import java.util.List;
 public class ChallengeSolver {
 
     public static List<ChessBoard> configuration(ChessBoard chessBoard, List<AbstractPieceType> pieceTypes, List<ChessBoard> configurationsOk) {
-        if (chessBoard.isValidConfiguration()) {
+        if (pieceTypes.isEmpty()) {
             if (!configurationsOk.contains(chessBoard)) {
                 configurationsOk.add(chessBoard);
                 chessBoard.show();
             }
         } else {
-            List<AbstractPieceType> tempPieces = new ArrayList<>(pieceTypes);
             for (int i = 1; i < chessBoard.getLines(); i++) {
                 for (int j = 1; j < chessBoard.getColumns(); j++) {
                     if (!pieceTypes.isEmpty()) {
                         AbstractPieceType pieceType = Validation.validateType(pieceTypes.get(0).pieceType(), i, j);
 
-                        if (chessBoard.isSafeMove(pieceType)) {
-                            pieceTypes.remove(0);
-                            ChessBoard positionedPierceBoard = chessBoard.positionOnBoard(pieceType);
-                            configuration(positionedPierceBoard, pieceTypes, configurationsOk);
-                            chessBoard.remove(pieceType);
-                            pieceTypes.clear();
-                            pieceTypes.addAll(tempPieces);
+                        if (isSafeMove(pieceType, chessBoard)) {
+                            configuration(chessBoard.positionOnBoard(pieceType), removeFirstPieceType(pieceTypes), configurationsOk);
                         }
                     }
                 }
@@ -36,6 +30,17 @@ public class ChallengeSolver {
         }
 
         return configurationsOk;
+    }
+
+    private static boolean isSafeMove(AbstractPieceType abstractPieceType, ChessBoard chessBoard) {
+        return chessBoard.isSafeMove(abstractPieceType) && !chessBoard.getPiecesAlreadyUsed().contains(abstractPieceType);
+    }
+
+    private static List<AbstractPieceType> removeFirstPieceType(List<AbstractPieceType> pieceTypes) {
+        List<AbstractPieceType> removePieceType = new ArrayList<>(pieceTypes);
+        removePieceType.remove(0);
+
+        return removePieceType;
     }
 
 }

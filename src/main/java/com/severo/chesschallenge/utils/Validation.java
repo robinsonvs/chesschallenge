@@ -16,7 +16,7 @@ public class Validation {
 
         List<AbstractPieceType> pieceTypes = validatePiecesType(pieces);
 
-        return new BoardPiecesTypeContainer(new ChessBoard(lines, columns, pieceTypes.size()), pieceTypes);
+        return new BoardPiecesTypeContainer(new ChessBoard(lines, columns), pieceTypes);
     }
 
     public static List<AbstractPieceType> validatePiecesType(String pieces) {
@@ -52,7 +52,7 @@ public class Validation {
             case "Knight":
                 return new KnightPiece(0, 0);
             default:
-                throw new RuntimeException("Undefined Piece Name");
+                throw new RuntimeException("Undefined Piece Type");
         }
     }
 
@@ -70,6 +70,6 @@ public class Validation {
                 return new RookPiece(line, column);
         }
 
-        return new WithoutPiece(0, 0);
+        return null;
     }
 }

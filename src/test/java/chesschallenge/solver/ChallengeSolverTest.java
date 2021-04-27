@@ -26,39 +26,37 @@ public class ChallengeSolverTest {
         List<ChessBoard> actual = ChallengeSolver.configuration(chessBoard, pieces, validConfigurations);
         List<ChessBoard> expected = validConfigurationBoard3x3With2Kings1Rook();
 
-        for (int i = 1; i < 4; i++) {
-            Assert.assertTrue(actual.get(i).equals(expected.get(i)));
-        }
+        Assert.assertArrayEquals(actual.toArray(), expected.toArray());
     }
 
     private List<ChessBoard> validConfigurationBoard3x3With2Kings1Rook() {
         List<ChessBoard> configurations = new ArrayList<>(4);
-        ChessBoard chessBoardOne = new ChessBoard(4, 4, 3);
-        chessBoardOne.setBoardHouses(Arrays
+        ChessBoard chessBoardOne = new ChessBoard(4, 4);
+        chessBoardOne.setPiecesOnBoard(Arrays
                 .asList(
                         new KingPiece(1, 1),
                         new KingPiece(1, 3),
                         new RookPiece(3, 2)));
         configurations.add(chessBoardOne);
 
-        ChessBoard chessBoardTwo = new ChessBoard(4, 4, 3);
-        chessBoardOne.setBoardHouses(Arrays
+        ChessBoard chessBoardTwo = new ChessBoard(4, 4);
+        chessBoardOne.setPiecesOnBoard(Arrays
                 .asList(
                         new KingPiece(1, 1),
                         new KingPiece(3, 1),
                         new RookPiece(2, 3)));
         configurations.add(chessBoardTwo);
 
-        ChessBoard chessBoardThree = new ChessBoard(4, 4, 3);
-        chessBoardOne.setBoardHouses(Arrays
+        ChessBoard chessBoardThree = new ChessBoard(4, 4);
+        chessBoardOne.setPiecesOnBoard(Arrays
                 .asList(
                         new KingPiece(1, 3),
                         new KingPiece(3, 3),
                         new RookPiece(2, 1)));
         configurations.add(chessBoardThree);
 
-        ChessBoard chessBoardFour = new ChessBoard(4, 4, 3);
-        chessBoardOne.setBoardHouses(Arrays
+        ChessBoard chessBoardFour = new ChessBoard(4, 4);
+        chessBoardOne.setPiecesOnBoard(Arrays
                 .asList(
                         new KingPiece(3, 1),
                         new KingPiece(3, 3),
