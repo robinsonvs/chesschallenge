@@ -10,18 +10,23 @@ import java.util.Set;
 
 public class ChallengeSolver {
 
-    public static Set<ChessBoard> configuration(ChessBoard chessBoard, List<String> pieceTypes, Set<ChessBoard> configurationsOk) {
-        if (pieceTypes.isEmpty()) {
-            if (!configurationsOk.contains(chessBoard)) {
-                configurationsOk.add(chessBoard);
-            }
-        } else {
+    public static Set<ChessBoard> configuration(ChessBoard chessBoard, List<String> pieceTypes, Set<ChessBoard> configurationsOk, Set<ChessBoard> tested) {
+        if (!pieceTypes.isEmpty()) {
             for (int i = 1; i < chessBoard.getLines(); i++) {
                 for (int j = 1; j < chessBoard.getColumns(); j++) {
                     AbstractPieceType pieceType = Factory.createNewPiece(pieceTypes.get(0), i, j);
-
                     if (chessBoard.isSafeMove(pieceType)) {
-                        configuration(chessBoard.positionOnBoard(pieceType), removeFirstPieceType(pieceTypes), configurationsOk);
+                        ChessBoard board = chessBoard.positionOnBoard(pieceType);
+                        if (pieceTypes.size() != 1) {
+                            if (!tested.contains(board)) {
+                                tested.add(board);
+                                configuration(chessBoard.positionOnBoard(pieceType), removeFirstPieceType(pieceTypes), configurationsOk, tested);
+                            }
+                        } else {
+                            if (!configurationsOk.contains(board)) {
+                                configurationsOk.add(board);
+                            }
+                        }
                     }
                 }
             }

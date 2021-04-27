@@ -16,15 +16,17 @@ public class Main {
         try {
             long beginTime = System.currentTimeMillis();
 
+            //BoardContainer boardContainer = Validation.validateInputs(new String[]{"8", "8", "Queen:8"});
             BoardContainer boardContainer = Validation.validateInputs(new String[]{"7", "7", "King:2;Queen:2;Bishop:2;Knight:1"});
+            //BoardContainer boardContainer = Validation.validateInputs(new String[]{"3", "3", "King:2;Rook:1"});
+            //BoardContainer boardContainer = Validation.validateInputs(new String[]{"4", "4", "Knight:4;Rook:2"});
+
             ChessBoard board = boardContainer.getBoard();
             List<String> pieceTypes = boardContainer.getPieceTypes();
 
-            Set<ChessBoard> configurationsOk = ChallengeSolver.configuration(board, pieceTypes, new HashSet<>());
+            Set<ChessBoard> configurationsOk = ChallengeSolver.configuration(board, pieceTypes, new HashSet<>(), new HashSet<>());
 
             long endTime = System.currentTimeMillis();
-
-            //configurationsOk.forEach(ChessBoard::show);
 
             System.out.println("Number of configurations: " + configurationsOk.size());
             System.out.println("Total time: " + (endTime - beginTime) + " ms");

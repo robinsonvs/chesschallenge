@@ -8,8 +8,8 @@ import java.util.Set;
 
 public class ChessBoard {
 
-    private int lines;
-    private int columns;
+    private final int lines;
+    private final int columns;
     private Set<AbstractPieceType> piecesAlreadyUsed;
 
     public ChessBoard(int lines, int columns) {
@@ -30,16 +30,6 @@ public class ChessBoard {
 
     public int getColumns() {
         return columns;
-    }
-
-    public void show() {
-        for (int i = 1; i < lines; i++) {
-            for (int j = 1; j < columns; j++) {
-                System.out.println(this.findPieceType(i, j) + " ");
-            }
-            System.out.println();
-        }
-        System.out.println();
     }
 
     public ChessBoard positionOnBoard(AbstractPieceType pieceType) {
@@ -63,11 +53,6 @@ public class ChessBoard {
 
         return canNotAttackOthers && isNotPositionOnBoard;
     }
-
-    public boolean contains(AbstractPieceType pieceType) {
-        return this.piecesAlreadyUsed.contains(pieceType);
-    }
-
 
     @Override
     public boolean equals(Object o) {
