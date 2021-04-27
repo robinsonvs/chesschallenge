@@ -9,10 +9,7 @@ import com.severo.chesschallenge.utils.Validation;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class ChallengeSolverTest {
 
@@ -23,7 +20,7 @@ public class ChallengeSolverTest {
         ChessBoard chessBoard = boardContainer.getBoard();
 
         Set<ChessBoard> validConfigurations = new HashSet<>();
-        Set<ChessBoard> actual = ChallengeSolver.configuration(chessBoard, pieces, validConfigurations, new HashSet<>());
+        Set<ChessBoard> actual = ChallengeSolver.findPossibleSolutions(chessBoard, pieces, validConfigurations, new HashSet<>());
         Set<ChessBoard> expected = validConfigurationBoard3x3With2Kings1Rook();
 
         Assert.assertTrue(actual.equals(expected));

@@ -20,7 +20,6 @@ public abstract class AbstractPieceType {
         return column;
     }
 
-
     public abstract boolean canAttack(AbstractPieceType abstractPieceType);
 
     public abstract String pieceType();
@@ -29,9 +28,9 @@ public abstract class AbstractPieceType {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        AbstractPieceType pieceType = (AbstractPieceType) o;
-        return line == pieceType.line &&
-                column == pieceType.column;
+        AbstractPieceType that = (AbstractPieceType) o;
+        return line == that.line &&
+                column == that.column;
     }
 
     @Override

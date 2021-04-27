@@ -1,16 +1,11 @@
 package com.severo.chesschallenge.pieces;
 
 import com.severo.chesschallenge.utils.Factory;
-import com.severo.chesschallenge.utils.Validation;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class KnightPiece extends AbstractPieceType {
-
-    private static final int[] moviesX = new int[]{1, 2, 2, 1, -1, -2, -2, -1};
-    private static final int[] moviesY = new int[]{-2, -1, 1, 2, 2, 1, -1, -2};
-
 
     public KnightPiece(int line, int column) {
         super(line, column);
@@ -18,6 +13,8 @@ public class KnightPiece extends AbstractPieceType {
 
     @Override
     public boolean canAttack(AbstractPieceType destiny) {
+        int[] moviesX = new int[]{1, 2, 2, 1, -1, -2, -2, -1};
+        int[] moviesY = new int[]{-2, -1, 1, 2, 2, 1, -1, -2};
         int line = this.getLine();
         int column = this.getColumn();
 

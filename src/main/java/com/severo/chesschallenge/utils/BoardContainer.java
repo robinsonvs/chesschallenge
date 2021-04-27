@@ -22,7 +22,4 @@ public class BoardContainer {
         return pieceTypes;
     }
 
-    public void setPieceTypes(List<String> pieceTypes) {
-        this.pieceTypes = pieceTypes;
-    }
 }

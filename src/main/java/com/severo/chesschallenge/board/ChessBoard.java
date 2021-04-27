@@ -2,26 +2,34 @@ package com.severo.chesschallenge.board;
 
 import com.severo.chesschallenge.pieces.AbstractPieceType;
 
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 public class ChessBoard {
 
     private final int lines;
     private final int columns;
-    private Set<AbstractPieceType> piecesAlreadyUsed;
+    private final Set<AbstractPieceType> piecesAlreadyUsed;
+    private final String[][] board;
 
     public ChessBoard(int lines, int columns) {
         this.lines = lines;
         this.columns = columns;
         this.piecesAlreadyUsed = new HashSet<>();
+        this.board = new String[lines][columns];
     }
 
     public ChessBoard(int lines, int columns, Set<AbstractPieceType> abstractPieceTypes) {
         this.lines = lines;
         this.columns = columns;
-        this.piecesAlreadyUsed = new HashSet<>(abstractPieceTypes);
+        this.board = new String[lines][columns];
+        this.piecesAlreadyUsed = abstractPieceTypes;
+        setPiecesAlreadyUsed(this.board, this.piecesAlreadyUsed);
+    }
+
+    private void setPiecesAlreadyUsed(String[][] board, Set<AbstractPieceType> usedPieces) {
+        for (AbstractPieceType abstractPieceType : usedPieces) {
+            board[abstractPieceType.getLine()][abstractPieceType.getColumn()] = abstractPieceType.pieceType();
+        }
     }
 
     public int getLines() {

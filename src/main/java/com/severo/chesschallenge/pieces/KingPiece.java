@@ -1,15 +1,11 @@
 package com.severo.chesschallenge.pieces;
 
 import com.severo.chesschallenge.utils.Factory;
-import com.severo.chesschallenge.utils.Validation;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class KingPiece extends AbstractPieceType {
-
-    private static final int[] moviesX = new int[]{-1, -1, -1, 0, 1, 1, 1, 0};
-    private static final int[] moviesY = new int[]{-1, 0, 1, 1, 1, 0, -1, -1};
 
     public KingPiece(int line, int column) {
         super(line, column);
@@ -17,6 +13,8 @@ public class KingPiece extends AbstractPieceType {
 
     @Override
     public boolean canAttack(AbstractPieceType destiny) {
+        int[] moviesX = new int[]{-1, -1, -1, 0, 1, 1, 1, 0};
+        int[] moviesY = new int[]{-1, 0, 1, 1, 1, 0, -1, -1};
         int line = this.getLine();
         int column = this.getColumn();
 
