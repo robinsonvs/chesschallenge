@@ -38,4 +38,12 @@ public abstract class AbstractPieceType {
     public int hashCode() {
         return Objects.hash(line, column);
     }
+
+    @Override
+    public String toString() {
+        return "AbstractPieceType{" +
+                "line=" + line +
+                ", column=" + column +
+                '}';
+    }
 }

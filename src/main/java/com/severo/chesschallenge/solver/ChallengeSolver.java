@@ -2,28 +2,26 @@ package com.severo.chesschallenge.solver;
 
 import com.severo.chesschallenge.board.ChessBoard;
 import com.severo.chesschallenge.pieces.AbstractPieceType;
-import com.severo.chesschallenge.utils.Validation;
+import com.severo.chesschallenge.utils.Factory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class ChallengeSolver {
 
-    public static List<ChessBoard> configuration(ChessBoard chessBoard, List<AbstractPieceType> pieceTypes, List<ChessBoard> configurationsOk) {
+    public static Set<ChessBoard> configuration(ChessBoard chessBoard, List<String> pieceTypes, Set<ChessBoard> configurationsOk) {
         if (pieceTypes.isEmpty()) {
             if (!configurationsOk.contains(chessBoard)) {
                 configurationsOk.add(chessBoard);
-                chessBoard.show();
             }
         } else {
             for (int i = 1; i < chessBoard.getLines(); i++) {
                 for (int j = 1; j < chessBoard.getColumns(); j++) {
-                    if (!pieceTypes.isEmpty()) {
-                        AbstractPieceType pieceType = Validation.validateType(pieceTypes.get(0).pieceType(), i, j);
+                    AbstractPieceType pieceType = Factory.createNewPiece(pieceTypes.get(0), i, j);
 
-                        if (isSafeMove(pieceType, chessBoard)) {
-                            configuration(chessBoard.positionOnBoard(pieceType), removeFirstPieceType(pieceTypes), configurationsOk);
-                        }
+                    if (chessBoard.isSafeMove(pieceType)) {
+                        configuration(chessBoard.positionOnBoard(pieceType), removeFirstPieceType(pieceTypes), configurationsOk);
                     }
                 }
             }
@@ -32,12 +30,8 @@ public class ChallengeSolver {
         return configurationsOk;
     }
 
-    private static boolean isSafeMove(AbstractPieceType abstractPieceType, ChessBoard chessBoard) {
-        return chessBoard.isSafeMove(abstractPieceType) && !chessBoard.getPiecesAlreadyUsed().contains(abstractPieceType);
-    }
-
-    private static List<AbstractPieceType> removeFirstPieceType(List<AbstractPieceType> pieceTypes) {
-        List<AbstractPieceType> removePieceType = new ArrayList<>(pieceTypes);
+    private static List<String> removeFirstPieceType(List<String> pieceTypes) {
+        List<String> removePieceType = new ArrayList<>(pieceTypes);
         removePieceType.remove(0);
 
         return removePieceType;

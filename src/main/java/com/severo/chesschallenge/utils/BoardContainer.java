@@ -1,16 +1,15 @@
 package com.severo.chesschallenge.utils;
 
 import com.severo.chesschallenge.board.ChessBoard;
-import com.severo.chesschallenge.pieces.AbstractPieceType;
 
 import java.util.List;
 
-public class BoardPiecesTypeContainer {
+public class BoardContainer {
 
     private ChessBoard board;
-    private List<AbstractPieceType> pieceTypes;
+    private List<String> pieceTypes;
 
-    public BoardPiecesTypeContainer(ChessBoard board, List<AbstractPieceType> pieceTypes) {
+    public BoardContainer(ChessBoard board, List<String> pieceTypes) {
         this.board = board;
         this.pieceTypes = pieceTypes;
     }
@@ -19,11 +18,11 @@ public class BoardPiecesTypeContainer {
         return board;
     }
 
-    public List<AbstractPieceType> getPieceTypes() {
+    public List<String> getPieceTypes() {
         return pieceTypes;
     }
 
-    public void setPieceTypes(List<AbstractPieceType> pieceTypes) {
+    public void setPieceTypes(List<String> pieceTypes) {
         this.pieceTypes = pieceTypes;
     }
 }

@@ -1,11 +1,13 @@
 package com.severo.chesschallenge;
 
 import com.severo.chesschallenge.board.ChessBoard;
-import com.severo.chesschallenge.pieces.AbstractPieceType;
-import com.severo.chesschallenge.utils.BoardPiecesTypeContainer;
+import com.severo.chesschallenge.solver.ChallengeSolver;
+import com.severo.chesschallenge.utils.BoardContainer;
 import com.severo.chesschallenge.utils.Validation;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Main {
 
@@ -13,15 +15,18 @@ public class Main {
 
         try {
             long beginTime = System.currentTimeMillis();
+
+            BoardContainer boardContainer = Validation.validateInputs(new String[]{"7", "7", "King:2;Queen:2;Bishop:2;Knight:1"});
+            ChessBoard board = boardContainer.getBoard();
+            List<String> pieceTypes = boardContainer.getPieceTypes();
+
+            Set<ChessBoard> configurationsOk = ChallengeSolver.configuration(board, pieceTypes, new HashSet<>());
+
             long endTime = System.currentTimeMillis();
 
-            BoardPiecesTypeContainer boardPiecesTypeContainer = Validation.validateInputs(args);
-            ChessBoard board = boardPiecesTypeContainer.getBoard();
+            //configurationsOk.forEach(ChessBoard::show);
 
-            List<AbstractPieceType> pieceTypes = boardPiecesTypeContainer.getPieceTypes();
-
-            //solutionsSolver here ...
-            System.out.println("Number of configurations: ");
+            System.out.println("Number of configurations: " + configurationsOk.size());
             System.out.println("Total time: " + (endTime - beginTime) + " ms");
         } catch (Exception exception) {
             exception.printStackTrace();

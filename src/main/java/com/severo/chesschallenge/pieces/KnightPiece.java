@@ -1,5 +1,6 @@
 package com.severo.chesschallenge.pieces;
 
+import com.severo.chesschallenge.utils.Factory;
 import com.severo.chesschallenge.utils.Validation;
 
 import java.util.ArrayList;
@@ -27,7 +28,7 @@ public class KnightPiece extends AbstractPieceType {
             int destinyColumn = column + moviesY[i];
 
             if (destinyLine > 0 && destinyColumn > 0) {
-                movies.add(Validation.validateType(destiny.pieceType(), destinyLine, destinyColumn));
+                movies.add(Factory.createNewPiece(destiny.pieceType(), destinyLine, destinyColumn));
             }
         }
 

@@ -3,12 +3,12 @@ package chesschallenge.board;
 import com.severo.chesschallenge.board.ChessBoard;
 import com.severo.chesschallenge.pieces.BishopPiece;
 import com.severo.chesschallenge.pieces.KingPiece;
-import com.severo.chesschallenge.pieces.KnightPiece;
 import com.severo.chesschallenge.pieces.QueenPiece;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.HashSet;
 
 public class ChessBoardTest {
 
@@ -30,8 +30,8 @@ public class ChessBoardTest {
 
     @Test
     public void twoIdenticalBoards() {
-        ChessBoard chessBoardFirst = new ChessBoard(5, 5, Arrays.asList(new KingPiece(1, 1), new QueenPiece(2, 2)));
-        ChessBoard chessBoardSecond = new ChessBoard(5, 5, Arrays.asList(new KingPiece(1, 1), new QueenPiece(2, 2)));
+        ChessBoard chessBoardFirst = new ChessBoard(5, 5, new HashSet<>(Arrays.asList(new KingPiece(1, 1), new QueenPiece(2, 2))));
+        ChessBoard chessBoardSecond = new ChessBoard(5, 5, new HashSet<>(Arrays.asList(new KingPiece(1, 1), new QueenPiece(2, 2))));
 
         Assert.assertEquals(chessBoardFirst, chessBoardSecond);
     }
