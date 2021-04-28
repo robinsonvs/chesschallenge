@@ -8,6 +8,8 @@ import java.util.List;
 
 public class ChessBoard {
 
+    private static final char NOTHING = '\u0000';
+
     private final int lines;
     private final int columns;
     private final List<AbstractPieceType> piecesAlreadyUsed;
@@ -29,9 +31,7 @@ public class ChessBoard {
     }
 
     private void setPiecesAlreadyUsed(char[][] board, List<AbstractPieceType> usedPieces) {
-        for (AbstractPieceType abstractPieceType : usedPieces) {
-            board[abstractPieceType.getLine()][abstractPieceType.getColumn()] = abstractPieceType.pieceType();
-        }
+        usedPieces.forEach(piece -> board[piece.getLine()][piece.getColumn()] = piece.pieceType());
     }
 
     public int getLines() {
@@ -50,8 +50,8 @@ public class ChessBoard {
     }
 
     public boolean isSafeMove(AbstractPieceType pieceTypeDestiny) {
-        boolean canNotAttackOthers = this.piecesAlreadyUsed.stream().noneMatch(p -> (p.canAttack(pieceTypeDestiny) || pieceTypeDestiny.canAttack(p)));
-        boolean isNotPositionOnBoard = this.board[pieceTypeDestiny.getLine()][pieceTypeDestiny.getColumn()] == '\u0000';
+        boolean canNotAttackOthers = this.piecesAlreadyUsed.stream().noneMatch(piece -> (piece.canAttack(pieceTypeDestiny) || pieceTypeDestiny.canAttack(piece)));
+        boolean isNotPositionOnBoard = this.board[pieceTypeDestiny.getLine()][pieceTypeDestiny.getColumn()] == NOTHING;
 
         return canNotAttackOthers && isNotPositionOnBoard;
     }

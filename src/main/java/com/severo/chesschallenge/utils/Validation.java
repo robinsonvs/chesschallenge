@@ -3,6 +3,7 @@ package com.severo.chesschallenge.utils;
 import com.severo.chesschallenge.board.ChessBoard;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Validation {
@@ -23,10 +24,7 @@ public class Validation {
     private static List<Character> validatePiecesType(String pieces) {
         String[] piecesQuantity = pieces.split(SEMICOLON);
         List<Character> piecesOk = new ArrayList<>();
-
-        for (String pieceQuantity : piecesQuantity) {
-            validatePiece(pieceQuantity, piecesOk);
-        }
+        Arrays.stream(piecesQuantity).forEach(p -> validatePiece(p, piecesOk));
 
         return piecesOk;
     }
