@@ -50,3 +50,21 @@ Algorithms, among others, but I didn't have time to go deeper to propose other v
 5. java -jar chesschallenge-1.0-SNAPSHOT.jar
 
 ---
+
+## Result average times
+
+#### Configuration: {"7", "7", "K:2;Q:2;B:2;N:1"}
+- Number of configurations: 3063828
+- Average time: 75641 ms
+
+#### Configuration: {"8", "8", "Q:8"}
+- Number of configurations: 92
+- Average time: 4782 ms
+
+#### Configuration: {"3", "3", "K:2;R:1"}
+- Number of configurations: 4
+- Average time: 24 ms
+
+#### Configuration: {"4", "4", "N:4;R:2"}
+- Number of configurations: 8
+- Average time: 61 ms
