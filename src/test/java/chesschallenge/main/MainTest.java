@@ -53,13 +53,13 @@ public class MainTest {
 
     @Test
     public void testMainClassWithBoard4x4With4Knights2Rook() {
-        BoardContainer boardContainer = Validation.validateInputs(new String[]{"3", "3", "K:2;R:1"});
+        BoardContainer boardContainer = Validation.validateInputs(new String[]{"4", "4", "N:4;R:2"});
 
         List<Character> pieces = boardContainer.getPieceTypes();
         ChessBoard chessBoard = boardContainer.getBoard();
 
         Set<ChessBoard> actualConfigurations = ChallengeSolver.findPossibleSolutions(chessBoard, pieces, new HashSet<>(), new HashSet<>());
 
-        Assert.assertEquals(4, actualConfigurations.size());
+        Assert.assertEquals(8, actualConfigurations.size());
     }
 }
