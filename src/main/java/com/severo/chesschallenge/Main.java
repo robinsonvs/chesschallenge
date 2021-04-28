@@ -15,18 +15,15 @@ public class Main {
 
         try {
 
-            //BoardContainer boardContainer = Validation.validateInputs(new String[]{"8", "8", "Queen:8"});
-            //BoardContainer boardContainer = Validation.validateInputs(new String[]{"7", "7", "King:2;Queen:2;Bishop:2;Knight:1"});
-            //BoardContainer boardContainer = Validation.validateInputs(new String[]{"3", "3", "King:2;Rook:1"});
-            BoardContainer boardContainer = Validation.validateInputs(new String[]{"4", "4", "Knight:4;Rook:2"});
+            BoardContainer boardContainer = Validation.validateInputs(new String[]{"7", "7", "K:2;Q:2;B:2;N:1"});
 
-            List<String> pieceTypes = boardContainer.getPieceTypes();
+            System.out.println("board 7x7 with 2 Kinds / 2 Queens / 2 Bishops / 1 Knight");
+
+            List<Character> pieceTypes = boardContainer.getPieceTypes();
             ChessBoard board = boardContainer.getBoard();
 
             long beginTime = System.currentTimeMillis();
-
             Set<ChessBoard> configurationsOk = ChallengeSolver.findPossibleSolutions(board, pieceTypes, new HashSet<>(), new HashSet<>());
-
             long endTime = System.currentTimeMillis();
 
             System.out.println("Number of configurations: " + configurationsOk.size());

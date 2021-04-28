@@ -6,21 +6,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Validation {
+    private static final String SEMICOLON = ";";
+    private static final String TWO_POINTS = ":";
+
+    private Validation() {}
 
     public static BoardContainer validateInputs(String[] args) {
         int lines = Integer.parseInt(args[0]) + 1;
         int columns = Integer.parseInt(args[1]) + 1;
 
         String pieces = args[2];
-
-        List<String> pieceTypes = validatePiecesType(pieces);
-
+        List<Character> pieceTypes = validatePiecesType(pieces);
         return new BoardContainer(new ChessBoard(lines, columns), pieceTypes);
     }
 
-    public static List<String> validatePiecesType(String pieces) {
-        String[] piecesQuantity = pieces.split(";");
-        List<String> piecesOk = new ArrayList<>();
+    private static List<Character> validatePiecesType(String pieces) {
+        String[] piecesQuantity = pieces.split(SEMICOLON);
+        List<Character> piecesOk = new ArrayList<>();
 
         for (String pieceQuantity : piecesQuantity) {
             validatePiece(pieceQuantity, piecesOk);
@@ -29,12 +31,12 @@ public class Validation {
         return piecesOk;
     }
 
-    public static void validatePiece(String pieceQuantity, List<String> pieces) {
-        String[] quantities = pieceQuantity.split(":");
+    private static void validatePiece(String pieceQuantity, List<Character> pieces) {
+        String[] quantities = pieceQuantity.split(TWO_POINTS);
         int quantity = Integer.parseInt(quantities[1]);
 
         for (int i = 0; i < quantity; i++) {
-            pieces.add(quantities[0]);
+            pieces.add(quantities[0].charAt(0));
         }
     }
 

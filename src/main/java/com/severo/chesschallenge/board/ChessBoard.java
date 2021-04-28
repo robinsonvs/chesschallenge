@@ -2,31 +2,33 @@ package com.severo.chesschallenge.board;
 
 import com.severo.chesschallenge.pieces.AbstractPieceType;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class ChessBoard {
 
     private final int lines;
     private final int columns;
-    private final Set<AbstractPieceType> piecesAlreadyUsed;
-    private final String[][] board;
+    private final List<AbstractPieceType> piecesAlreadyUsed;
+    private final char[][] board;
 
     public ChessBoard(int lines, int columns) {
         this.lines = lines;
         this.columns = columns;
-        this.piecesAlreadyUsed = new HashSet<>();
-        this.board = new String[lines][columns];
+        this.piecesAlreadyUsed = new ArrayList<>();
+        this.board = new char[lines][columns];
     }
 
-    public ChessBoard(int lines, int columns, Set<AbstractPieceType> abstractPieceTypes) {
+    public ChessBoard(int lines, int columns, List<AbstractPieceType> abstractPieceTypes) {
         this.lines = lines;
         this.columns = columns;
-        this.board = new String[lines][columns];
+        this.board = new char[lines][columns];
         this.piecesAlreadyUsed = abstractPieceTypes;
         setPiecesAlreadyUsed(this.board, this.piecesAlreadyUsed);
     }
 
-    private void setPiecesAlreadyUsed(String[][] board, Set<AbstractPieceType> usedPieces) {
+    private void setPiecesAlreadyUsed(char[][] board, List<AbstractPieceType> usedPieces) {
         for (AbstractPieceType abstractPieceType : usedPieces) {
             board[abstractPieceType.getLine()][abstractPieceType.getColumn()] = abstractPieceType.pieceType();
         }
@@ -41,23 +43,15 @@ public class ChessBoard {
     }
 
     public ChessBoard positionOnBoard(AbstractPieceType pieceType) {
-        Set<AbstractPieceType> pieceTypes = new HashSet<>(this.piecesAlreadyUsed);
+        List<AbstractPieceType> pieceTypes = new ArrayList<>(this.piecesAlreadyUsed);
         pieceTypes.add(pieceType);
 
         return new ChessBoard(lines, columns, pieceTypes);
     }
 
-    public String findPieceType(int line, int column) {
-        return this.piecesAlreadyUsed.stream()
-                .filter(p -> p.getColumn() == column && p.getLine() == line)
-                .findFirst()
-                .map(AbstractPieceType::toString)
-                .orElse("x");
-    }
-
     public boolean isSafeMove(AbstractPieceType pieceTypeDestiny) {
         boolean canNotAttackOthers = this.piecesAlreadyUsed.stream().noneMatch(p -> (p.canAttack(pieceTypeDestiny) || pieceTypeDestiny.canAttack(p)));
-        boolean isNotPositionOnBoard = !this.piecesAlreadyUsed.contains(pieceTypeDestiny);
+        boolean isNotPositionOnBoard = this.board[pieceTypeDestiny.getLine()][pieceTypeDestiny.getColumn()] == '\u0000';
 
         return canNotAttackOthers && isNotPositionOnBoard;
     }
@@ -65,15 +59,18 @@ public class ChessBoard {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ChessBoard that = (ChessBoard) o;
-        return lines == that.lines &&
-                columns == that.columns &&
-                Objects.equals(piecesAlreadyUsed, that.piecesAlreadyUsed);
+        if (!(o instanceof ChessBoard)) return false;
+
+        ChessBoard board1 = (ChessBoard) o;
+
+        if (lines != board1.lines) return false;
+        if (columns != board1.columns) return false;
+        return Arrays.deepEquals(board, board1.board);
+
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lines, columns, piecesAlreadyUsed);
+        return 31 * Arrays.deepHashCode(board);
     }
 }

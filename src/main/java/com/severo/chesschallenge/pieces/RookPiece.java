@@ -10,12 +10,11 @@ public class RookPiece extends AbstractPieceType {
     public boolean canAttack(AbstractPieceType destiny) {
         boolean sameLine = this.getLine() == destiny.getLine();
         boolean sameColumn = this.getColumn() == destiny.getColumn();
-
         return sameLine || sameColumn;
     }
 
     @Override
-    public String pieceType() {
-        return "Rook";
+    public char pieceType() {
+        return 'R';
     }
 }

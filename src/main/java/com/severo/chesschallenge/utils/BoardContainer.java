@@ -6,10 +6,10 @@ import java.util.List;
 
 public class BoardContainer {
 
-    private ChessBoard board;
-    private List<String> pieceTypes;
+    private final ChessBoard board;
+    private final List<Character> pieceTypes;
 
-    public BoardContainer(ChessBoard board, List<String> pieceTypes) {
+    public BoardContainer(ChessBoard board, List<Character> pieceTypes) {
         this.board = board;
         this.pieceTypes = pieceTypes;
     }
@@ -18,7 +18,7 @@ public class BoardContainer {
         return board;
     }
 
-    public List<String> getPieceTypes() {
+    public List<Character> getPieceTypes() {
         return pieceTypes;
     }
 

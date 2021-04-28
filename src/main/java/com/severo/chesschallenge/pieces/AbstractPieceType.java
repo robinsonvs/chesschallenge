@@ -1,7 +1,5 @@
 package com.severo.chesschallenge.pieces;
 
-import java.util.Objects;
-
 public abstract class AbstractPieceType {
 
     private final int line;
@@ -22,27 +20,26 @@ public abstract class AbstractPieceType {
 
     public abstract boolean canAttack(AbstractPieceType abstractPieceType);
 
-    public abstract String pieceType();
+    public abstract char pieceType();
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof AbstractPieceType)) return false;
+
         AbstractPieceType that = (AbstractPieceType) o;
-        return line == that.line &&
-                column == that.column;
+
+        if (line != that.line) return false;
+        if (column != that.column) return false;
+        return pieceType() == that.pieceType();
+
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(line, column);
-    }
-
-    @Override
-    public String toString() {
-        return "AbstractPieceType{" +
-                "line=" + line +
-                ", column=" + column +
-                '}';
+        int result = line;
+        result = 103 * result + column;
+        result = 103 * result + pieceType();
+        return result;
     }
 }

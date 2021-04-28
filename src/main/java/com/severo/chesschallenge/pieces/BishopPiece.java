@@ -12,7 +12,7 @@ public class BishopPiece extends AbstractPieceType {
     }
 
     @Override
-    public String pieceType() {
-        return "Bishop";
+    public char pieceType() {
+        return 'B';
     }
 }

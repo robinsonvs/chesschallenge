@@ -11,12 +11,11 @@ public class QueenPiece extends AbstractPieceType {
         boolean sameLine = this.getLine() == destiny.getLine();
         boolean sameColumn = this.getColumn() == destiny.getColumn();
         boolean sameDiagonal = Math.abs(destiny.getLine() - this.getLine()) == Math.abs(destiny.getColumn() - this.getColumn());
-
         return sameLine || sameColumn || sameDiagonal;
     }
 
     @Override
-    public String pieceType() {
-        return "Queen";
+    public char pieceType() {
+        return 'Q';
     }
 }
