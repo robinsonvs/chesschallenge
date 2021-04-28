@@ -1,45 +1,52 @@
-**Edit a file, create a new file, and clone from Bitbucket in under 2 minutes**
 
-When you're done, you can delete the content in this README and update the file with details for others getting started with your repository.
+## The Problem
 
-*We recommend that you open this README in another tab as you perform the tasks below. You can [watch our video](https://youtu.be/0ocf7u76WSo) for a full demo of all the steps in this tutorial. Open the video in a new tab to avoid leaving Bitbucket.*
+The problem is to find all unique configurations of a set of normal chess pieces on a chess board with
+dimensions M x N where none of the pieces is in a position to take any of the others. Providing the number
+of results is useful, but not enough to complete the assignment. Assume the colour of the piece does not
+matter, and that there are no pawns among the pieces.
+Write a program which takes as input:
 
----
+1. The dimensions of the board: M, N.
+2. The number of pieces of each type (King, Queen, Bishop, Rook and Knight) to try and place on
+   the board.
 
-## Edit a file
+As output, the program should list all the unique configurations to the console for which all of the pieces
+can be placed on the board without threatening each other.
+When returning your solution, please provide with your answer the total number of unique configurations
+for a 7x7 board with 2 Kings, 2 Queens, 2 Bishops and 1 Knight. Also provide the time it took to
+get the final score. Needless to say, the lower the time, the better.
 
-You’ll start by editing this README file to learn how to edit a file in Bitbucket.
-
-1. Click **Source** on the left side.
-2. Click the README.md link from the list of files.
-3. Click the **Edit** button.
-4. Delete the following text: *Delete this line to make a change to the README from Bitbucket.*
-5. After making your change, click **Commit** and then **Commit** again in the dialog. The commit page will open and you’ll see the change you just made.
-6. Go back to the **Source** page.
-
----
-
-## Create a file
-
-Next, you’ll add a new file to this repository.
-
-1. Click the **New file** button at the top of the **Source** page.
-2. Give the file a filename of **contributors.txt**.
-3. Enter your name in the empty file space.
-4. Click **Commit** and then **Commit** again in the dialog.
-5. Go back to the **Source** page.
-
-Before you move on, go ahead and explore the repository. You've already seen the **Source** page, but check out the **Commits**, **Branches**, and **Settings** pages.
 
 ---
 
-## Clone a repository
+## The Solution
 
-Use these steps to clone from SourceTree, our client for using the repository command-line free. Cloning allows you to work on your files locally. If you don't yet have SourceTree, [download and install first](https://www.sourcetreeapp.com/). If you prefer to clone from the command line, see [Clone a repository](https://confluence.atlassian.com/x/4whODQ).
+The following solution is based on the [N-Queen Problem](http://mathcenter.oxford.emory.edu/site/cs171/nQueensProblemAndBacktracking/), 
+which is a well-known optimization problem taught in Computer Science classes. The proposed solution makes use of 
+a technique called backtracking to find all the solutions to the problem. Based on experience with old problems, 
+I reduced the current problem to an N-Queen problem with an 8x8 card. After getting a basic solution, I 
+added more parts, determined how they moved, wrote unit tests and finally worked with a focus on improving 
+performance because in some scenarios the algorithm proved to be very slow. Further testing would be needed 
+with some profiling tool to check the points in the code and adjust. There are other solutions using Genetic 
+Algorithms, among others, but I didn't have time to go deeper to propose other views. Thanks
 
-1. You’ll see the clone button under the **Source** heading. Click that button.
-2. Now click **Check out in SourceTree**. You may need to create a SourceTree account or log in.
-3. When you see the **Clone New** dialog in SourceTree, update the destination path and name if you’d like to and then click **Clone**.
-4. Open the directory you just created to see your repository’s files.
+---
 
-Now that you're more familiar with your Bitbucket repository, go ahead and add a new file locally. You can [push your change back to Bitbucket with SourceTree](https://confluence.atlassian.com/x/iqyBMg), or you can [add, commit,](https://confluence.atlassian.com/x/8QhODQ) and [push from the command line](https://confluence.atlassian.com/x/NQ0zDQ).
+## Dependencies
+
+1. Git
+2. JDK 1.8
+3. Maven 3
+
+---
+
+## Instructions
+
+1. git clone (https://robinsonvs@bitbucket.org/robinsonvs/chesschallenge.git)
+2. cd chesschallenge
+3. mvn clean install
+4. cd target
+5. java -jar chesschallenge-1.0-SNAPSHOT.jar
+
+---
