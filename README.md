@@ -43,7 +43,7 @@ Algorithms, among others, but I didn't have time to go deeper to propose other v
 
 ## Instructions
 
-1. git clone (https://robinsonvs@bitbucket.org/robinsonvs/chesschallenge.git)
+1. git clone (https://github.com/robinsonvs/chesschallenge.git)
 2. cd chesschallenge
 3. mvn clean install
 4. cd target
